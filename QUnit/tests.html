@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>StringExtension QUnit Tests</title>
+        <link rel="stylesheet" href="resources/qunit.css" />
+        
+        
+        <script src="resources/qunit.js"></script>
+        <script src="../StringExtension.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+
+
+        <script>
+            // <![CDATA[
+
+            module('insertOrRemove : Funções para inserir, remover, alterar ou substituir');
+
+            
+
+            test('Insert', function () {
+                var str = 'Uma nova palavra deverá surgir em um ponto desta sentença';
+                var result = str.Insert(9, 'nova mesmo ');
+                var expected = 'Uma nova nova mesmo palavra deverá surgir em um ponto desta sentença';
+                equal(result, expected, '');
+            });
+
+            test('Remove', function () {
+                var str = 'Uma sequencia desta sentença deverá desaparecer';
+                var result = str.Remove(4, 9);
+                var expected = 'Uma  desta sentença deverá desaparecer';
+                equal(result, expected, '');
+            });
+
+            test('Trim', function () {
+                var str = '  Valor Final  ';
+                var result = str.Trim();
+                var expected = 'Valor Final';
+                equal(result, expected, '');
+            });
+
+            test('RemoveChars', function () {
+                var str = 'Todas vogais desta sentença de teste deverão desaparecer';
+                var result = str.RemoveChars('aeiou');
+                var expected = 'Tds vgs dst sntnç d tst dvrã dsprcr';
+                equal(result, expected, '');
+
+                var str = 'yyyy-MM-ddTHH:mm:ssZ';
+                var result = str.RemoveChars('-/.:wWzZ');
+                var expected = 'yyyyMMddTHHmmss';
+                equal(result, expected, '');
+            });
+
+            test('OnlyCharCollection', function () {
+                var str = 'Todas vogais desta sentença de teste deverão desaparecer';
+                var result = str.OnlyCharCollection('bcçdfghjklmnpqrstvwxyzBCÇDFGHJKLMNPQRSTVWXYZ .ãÃ');
+                var expected = 'Tds vgs dst sntnç d tst dvrã dsprcr';
+                equal(result, expected, '');
+            });
+
+            test('ReplaceAll', function () {
+                var str = 'Neste teste todas as letras "e" serão alteradas por um caracter "§".';
+                var result = str.ReplaceAll('e', '§');
+                var expected = 'N§st§ t§st§ todas as l§tras "§" s§rão alt§radas por um caract§r "§".';
+                equal(result, expected, '');
+            });
+
+            test('MaxWordsExpression', function () {
+                var str = 'Das várias palavras que há nesta sentença, apenas 5 permanecerão.';
+                var result = str.MaxWordsExpression(5);
+                var expected = 'Das várias palavras que há';
+                equal(result, expected, '');
+            });
+
+            test('MaxCharExpression', function () {
+                var str = 'Das várias palavras que há nesta sentença, apenas 5 permanecerão.';
+                var result = str.MaxCharExpression(35);
+                var expected = 'Das várias palavras que há nesta se';
+                equal(result, expected, '');
+
+                var str = 'Das várias palavras que há nesta sentença, apenas 5 permanecerão.';
+                var result = str.MaxCharExpression(35, '...');
+                var expected = 'Das várias palavras que há nesta...';
+                equal(result, expected, '');
+            });
+            
+            test('ReplaceGlyphs', function () {
+                var str = 'Cáchôrrãoà grandão confusão, há acentuação.';
+                var result = str.ReplaceGlyphs();
+                var expected = 'Cachorraoa grandao confusao_ ha acentuacao.';
+                equal(result, expected, '');
+            });
+           
+            test('ConvertStringToXMLValue', function () {
+                var str = 'Paty & Rianna Cia Ltda > que TTT';
+                var result = str.ConvertStringToXMLValue();
+                var expected = 'Paty &amp; Rianna Cia Ltda &gt; que TTT';
+                equal(result, expected, '');
+            });
+
+            test('ConvertXMLValueToString', function () {
+                var str = 'Paty &amp; Rianna Cia Ltda &gt; que TTT';
+                var result = str.ConvertXMLValueToString();
+                var expected = 'Paty & Rianna Cia Ltda > que TTT';
+                equal(result, expected, '');
+            });
+
+            test('UpperCaseFirst', function () {
+                var str = 'apenas a primeira letra da frase em maiuscula';
+                var result = str.UpperCaseFirst();
+                var expected = 'Apenas a primeira letra da frase em maiuscula';
+                equal(result, expected, '');
+
+                var str = 'rianna cantarelli schellin';
+                var result = str.UpperCaseFirst(true);
+                var expected = 'Rianna Cantarelli Schellin';
+                equal(result, expected, '');
+            });
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('worldPatterns : Teste de padrões internacionais.');
+
+            
+
+            test('IsNumber', function () {
+                var NovaString = 'Valor';
+
+                var strValidNumbers = [
+                                                    '0', '+0', '-0', '1', '+1', '-1',
+                                                    '123', '+123', '-123', '-1.233,3', '-1,233.3',
+                                                    '1.230', '+1.230', '-1.230',
+                                                    '1,230', '+1,230', '-1,230',
+                                                    '11.456', '+11.456', '-11.456',
+                                                    '11,456', '+11,456', '-11,456',
+                                                    '25.698,45687', '+25.698,45687', '-25.698,45687',
+                                                    '25,698.45687', '+25,698.45687', '-25,698.45687',
+                                                    '56.888.000', '+56.888.000', '-56.888.000',
+                                                    '56,888,000', '+56,888,000', '-56,888,000',
+                                                    '56.888,000', '+56.888,000', '-56.888,000',
+                                                    '56,888.000', '+56,888.000', '-56,888.000',
+                                                    '56888000', '568880000', '5688800000', '56888000000',
+                                                    '568880000000',
+                                                    '5688800000000',
+                                                    '56888000000000',
+                                                    '568880000000000',
+                                                    '5688800000000000',
+                                                    '-100000000000000000',
+                                                    '-10000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+                                                    '-0.10000000000000000'
+                                                ];
+
+
+                var strInvalidNumbers = [
+                                                    '0+', '0-', '.1', '1+', '1-', ',1', '1,', '1.', '*1', '!1', '=1', 'a', '10x12', 'FFFFFF', '123L',
+                                                    '12..3', '+1,,23', '-1,233,3', '-1.233.3'
+                                                ];
+                //var i = 52;
+                for (var i = 0; i < strValidNumbers.length; i++) {
+                    ok(strValidNumbers[i].IsNumber(), 'Número Considerado Válido : ' + strValidNumbers[i]);
+                }
+
+
+                for (var i = 0; i < strInvalidNumbers.length; i++) {
+                    ok(!strInvalidNumbers[i].IsNumber(), 'Número Invalido : ' + strInvalidNumbers[i]);
+                }
+            });
+
+            test('IsEmail', function () {
+
+                strValidEmails = [
+                                                    "v@a.li",
+                                                    "v.a@a.li",
+                                                    "va@l.idmail",
+                                                    "va@li.dmail",
+                                                    "va@lid.mail",
+                                                    "va@lidm.ail",
+                                                    "va@lidma.il",
+                                                    "v.a@lidma.il"
+                                                ];
+
+                strInvalidEmails = [
+                                                    "i",
+                                                    "i@",
+                                                    "i@n",
+                                                    "i@n.v",
+                                                    "i.n@n.v",
+                                                    "@",
+                                                    "@invalid",
+                                                    "@inva.lid"
+                                                ];
+
+
+                for (var i = 0; i < strValidEmails.length; i++) {
+                    ok(strValidEmails[i].IsEmail(), 'Emails informados são válidos');
+                }
+                for (var i = 0; i < strValidEmails.length; i++) {
+                    ok(!strInvalidEmails[i].IsEmail(), 'Emails informados não são válidos');
+                }
+            });
+
+            test('IsURL', function () {
+
+                strValidURL = [
+                                                    "http://aeondigital.com.br",
+                                                    "https://aeondigital.com.br",
+                                                    "ftp://aeondigital.com.br",
+                                                    "ftps://aeondigital.com.br",
+                                                    "http://www.aeondigital.com.br",
+                                                    "https://www.aeondigital.com.br",
+                                                    "http://www.aeondigital.com.br?param1=value1&param2=value2",
+                                                    "http://a.e",
+                                                    "http://a.e.o",
+                                                    "http://a.e.o.n",
+                                                    "aeondigital.com.br"
+                                                ];
+
+
+                strInvalidURL = [
+                                                    "http",
+                                                    "http:",
+                                                    "http:/",
+                                                    "http://",
+                                                    "http://a",
+                                                    "://aeondigital.com.br",
+                                                    "//aeondigital.com.br",
+                                                    "/aeondigital.com.br"
+                                                ];
+
+                for (var i = 0; i < strValidURL.length; i++) {
+                    ok(strValidURL[i].IsURL(), 'URLs informados são válidos');
+                }
+                for (var i = 0; i < strInvalidURL.length; i++) {
+                    ok(!strInvalidURL[i].IsURL(), 'URLs informados não são válidos');
+                }
+            });
+
+            test('IsColor', function () {
+                strValidColors = ['#000000', '#FFFFFF'];
+                strInvalidColors = ['#000', 'FFFFFF', '#GGGGGG'];
+
+                for (var i = 0; i < strValidColors.length; i++) {
+                    ok(strValidColors[i].IsColor(), 'Cores informadas são válidos');
+                }
+                for (var i = 0; i < strInvalidColors.length; i++) {
+                    ok(!strInvalidColors[i].IsColor(), 'Cores informadas não são válidos');
+                }
+            });
+
+            test('IsLocale', function () {
+                strValidLocales = ['pt-br', 'pt-BR', 'en-us', 'ppee'];
+                strInvalidLocales = ['pt', 'br', 'pt-B', 'en'];
+
+                expect(8);
+
+                for (var i = 0; i < strValidLocales.length; i++) {
+                    ok(strValidLocales[i].IsLocale(), 'Locales informadas são válidos');
+                }
+                for (var i = 0; i < strInvalidLocales.length; i++) {
+                    ok(!strInvalidLocales[i].IsLocale(), 'Locales informadas não são válidos');
+                }
+            });
+
+            test('IsDateTimeGlobalZone', function () {
+                ok('2012/01/01T23:59:59Z'.IsDateTimeGlobalZone(), 'Data válida');
+                ok(!'2012/01/01t23:59:59z'.IsDateTimeGlobalZone(), 'Data inválida');
+                ok(!'2012/01/01T23:59:59'.IsDateTimeGlobalZone(), 'Data inválida');
+                ok(!'2012/01/01T24:59:59Z'.IsDateTimeGlobalZone(), 'Data inválida');
+                ok(!'2012/01/01 23:59:59Z'.IsDateTimeGlobalZone(), 'Data inválida');
+                ok(!'2012/02/30T23:59:59Z'.IsDateTimeGlobalZone(), 'Data valida');
+            });
+
+            test('IsDateTimeLocal', function () {
+                ok('1980-05-17T09:45:00'.IsDateTimeLocal(), 'Data válida');
+                ok('2012/01/01T23:59:59'.IsDateTimeLocal(), 'Data válida');
+                ok('2012-02-01T15:45:30'.IsDateTimeLocal(), 'Data válida');
+                ok(!'2012/01/01T23:59:59Z'.IsDateTimeLocal(), 'Data inválida');
+            });
+
+            test('IsDateTime', function () {
+                ok('2012/01/01 23:59:59'.IsDateTime(), 'Data válida');
+                ok(!'2012/01/01T23:59:59'.IsDateTime(), 'Data inválida');
+            });
+
+            test('IsDate', function () {
+                ok('2012/02/29'.IsDate(), 'Data válida');
+                ok(!'29/02/2012'.IsDate(), 'Data inválida');
+                ok(!'02/29/2012'.IsDate(), 'Data inválida');
+            });
+
+            test('IsMonth', function () {
+                ok('2012-12'.IsMonth(), 'Mês válido');
+                ok(!'2012-13'.IsMonth(), 'Mês Inválido');
+            });
+
+            test('IsWeek', function () {
+                ok('2012-W01-1'.IsWeek(), 'Semana válida');
+                ok('2012-W50-7'.IsWeek(), 'Semana válida');
+                ok('2012-01-1'.IsWeek(), 'Semana válida');
+                ok(!'2012-W01-8'.IsWeek(), 'Semana inválida');
+                ok(!'2012-W54-1'.IsWeek(), 'Semana inválida');
+            });
+
+            test('IsTime', function () {
+                ok('10:10:10'.IsTime(), 'Horário válido');
+                ok(!'14:60:00'.IsTime(), 'Horário Inválido');
+            });
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('brasilPatterns : Teste de padrões brasileiros.');
+
+
+
+            test('IsZipCode_Br', function () {
+
+                strValidZip = [
+                                                    "00000-000",
+                                                    "00000000"
+                                                ];
+
+                strInvalidZip = [
+                                                    "0",
+                                                    "00",
+                                                    "000",
+                                                    "0000",
+                                                    "00000",
+                                                    "000000",
+                                                    "0000000",
+                                                    "00000_000",
+                                                    "00000 000",
+                                                    "A0000-000",
+                                                ];
+
+                for (var i = 0; i < strValidZip.length; i++) {
+                    ok(strValidZip[0].IsZipCode_Br(), 'CEPs informados são válidos');
+                }
+                for (var i = 0; i < strInvalidZip.length; i++) {
+                    ok(!strInvalidZip[i].IsZipCode_Br(), 'CEPs informados não são válidos');
+                }
+            });
+
+            test('IsPhone_Br', function () {
+
+                strValidPhone = [
+                                                    "0099998888",
+                                                    "00 99998888",
+                                                    "(0099998888",
+                                                    "(00)99998888",
+                                                    "(00) 99998888",
+                                                    "(00) 9.9998888",
+                                                    "(00) 99.998888",
+                                                    "(00) 999.98888",
+                                                    "(00) 9999.8888",
+                                                    "(00) 99998.888",
+                                                    "(00) 999988.88",
+                                                    "(00) 9999888.8",
+
+
+                                                    "00999888777",
+                                                    "00 999888777",
+                                                    "(00999888777",
+                                                    "(00)999888777",
+                                                    "(00) 999888777",
+                                                    "(00) 9.99888777",
+                                                    "(00) 99.9888777",
+                                                    "(00) 999.888777",
+                                                    "(00) 9998.88777",
+                                                    "(00) 99988.8777",
+                                                    "(00) 999888.777",
+                                                    "(00) 9998887.77",
+                                                    "(00) 99988877.7",
+
+                                                    "(00) 9.99888777",
+                                                    "(00) 9.9.9888777",
+                                                    "(00) 9.99.888777",
+                                                    "(00) 9.998.88777",
+                                                    "(00) 9.9988.8777",
+                                                    "(00) 9.99888.777",
+                                                    "(00) 9.998887.77",
+                                                    "(00) 9.9988877.7",
+                                                ];
+
+                strInvalidPhone = [
+                                                    "0",
+                                                    "00",
+                                                    "000",
+                                                    "0000",
+                                                    "00000",
+                                                    "000000",
+                                                    "0000000",
+                                                    "00000000",
+                                                    "000000000"
+                                                ];
+
+                for (var i = 0; i < strValidPhone.length; i++) {
+                    ok(strValidPhone[i].IsPhone_Br(), 'Fones informados são válidos');
+                }
+                for (var i = 0; i < strInvalidPhone.length; i++) {
+                    ok(!strInvalidPhone[i].IsPhone_Br(), 'Fones informados não são válidos');
+                }
+            });
+
+            test('IsCPF', function () {
+
+                strValidCPF = [
+                                                    "990.277.550-00",
+                                                    "99027755000",
+                                                    "990277550-00",
+                                                    "990277.550-00",
+                                                    "990277.550-00",
+                                                    "011.310.510-09",
+                                                    "617.384.920-87",
+                                                    "161.510.890-49"
+                                                ];
+
+                strInValidCPF = [
+                                                    "990.277.550-01",
+                                                    "99027755001",
+                                                    "990277550-01",
+                                                    "990277.550-01",
+                                                    "990277.550-01",
+                                                    "011.310.511-09",
+                                                    "617.384.921-87",
+                                                    "161.510.891-49"
+                                                ];
+
+
+                for (var i = 0; i < strValidCPF.length; i++) {
+                    ok(strValidCPF[i].IsCPF(), 'CPFs informados são válidos');
+                }
+                for (var i = 0; i < strInValidCPF.length; i++) {
+                    ok(!strInValidCPF[i].IsCPF(), 'CPFs informados não são válidos');
+                }
+            });
+
+            test('IsCNPJ', function () {
+
+                strValidCNPJ = [
+                                                    "08.253.743/0001-85",
+                                                    "08.253.743/000185",
+                                                    "08.253.743000185",
+                                                    "08.253.743000185",
+                                                    "08.253743000185",
+                                                    "08253743000185",
+                                                ];
+
+                strInValidCNPJ = [
+                                                    "88.253.743/0001-85",
+                                                    "88.253.743/000185",
+                                                    "88.253.743000185",
+                                                    "88.253.743000185",
+                                                    "88.253743000185",
+                                                    "88253743000185",
+                                                ];
+
+                for (var i = 0; i < strValidCNPJ.length; i++) {
+                    ok(strValidCNPJ[i].IsCNPJ(), 'CNPJs informados são válidos');
+                }
+                for (var i = 0; i < strInValidCNPJ.length; i++) {
+                    ok(!strInValidCNPJ[i].IsCNPJ(), 'CNPJs informados não são válidos');
+                }
+            });
+
+            test('IsDate_Br', function () {
+                ok('29/02/2012'.IsDate_Br(), 'Data válida');
+                ok(!'2012/02/29'.IsDate_Br(), 'Data inválida');
+                ok(!'02/29/2012'.IsDate_Br(), 'Data inválida');
+            });
+
+            test('IsMonth_Br', function () {
+                ok('01-2012'.IsMonth_Br(), 'Mês válido');
+                ok(!'13-2012'.IsMonth_Br(), 'Mês Inválido');
+            });
+
+            test('IsWeek_Br', function () {
+                ok('1-01W-2012'.IsWeek_Br(), 'Semana válida');
+                ok('7-50W-2012'.IsWeek_Br(), 'Semana válida');
+                ok('1-01-2012'.IsWeek_Br(), 'Semana válida');
+                ok(!'8-01W-2012'.IsWeek_Br(), 'Semana inválida');
+                ok(!'1-54W-2012'.IsWeek_Br(), 'Semana inválida');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('euaPatterns : Teste de padrões dos EUA.');
+
+
+
+            test('IsZipCode_EUA', function () {
+
+                strValidZip = [
+                                                    "00000",
+                                                    "000000000",
+                                                    "00000-0000",
+                                                ];
+
+                strInvalidZip = [
+                                                    "0",
+                                                    "00",
+                                                    "000",
+                                                    "0000",
+                                                    "000000",
+                                                    "0000000",
+                                                    "00000000",
+                                                    "00000_0000",
+                                                    "00000 0000",
+                                                    "A0000-0000",
+                                                ];
+
+                for (var i = 0; i < strValidZip.length; i++) {
+                    ok(strValidZip[0].IsZipCode_EUA(), 'ZipCodes informados são válidos');
+                }
+                for (var i = 0; i < strInvalidZip.length; i++) {
+                    ok(!strInvalidZip[i].IsZipCode_EUA(), 'ZipCodes informados não são válidos');
+                }
+            });
+
+            test('IsPhone_EUA', function () {
+
+                strValidPhone = [
+                                                    "0099999999",
+                                                    "000 999.9999",
+                                                    "(000) 999.9999",
+                                                ];
+
+                strInvalidPhone = [
+                                                    "0",
+                                                    "00",
+                                                    "000",
+                                                    "0000",
+                                                    "00000",
+                                                    "000000",
+                                                    "0000000",
+                                                    "00000000",
+                                                    "000000000",
+                                                    "(0099999999",
+                                                    "(000)9999999",
+                                                    "(000) 9999999",
+                                                    "(000) 9.999999",
+                                                    "(000) 99.99999",
+                                                    "(000) 9999.999",
+                                                    "(000) 99999.99",
+                                                    "(000) 999999.9",
+                                                ];
+
+                for (var i = 0; i < strValidPhone.length; i++) {
+                    ok(strValidPhone[i].IsPhone_EUA(), 'Fones informados são válidos');
+                }
+                for (var i = 0; i < strInvalidPhone.length; i++) {
+                    ok(!strInvalidPhone[i].IsPhone_EUA(), 'Fones informados não são válidos');
+                }
+            });
+
+            test('IsDate_EUA', function () {
+                ok('02/29/2012'.IsDate_EUA(), 'Data válida');
+                ok(!'2012/02/29'.IsDate_EUA(), 'Data inválida');
+                ok(!'2012/02/29'.IsDate_EUA(), 'Data inválida');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('incommonValidation : Validações incomuns.');
+
+
+
+            test('IsPassword', function () {
+                strValidPass = ['password1!', 'quertyu+', 'p@ssw0rd!'];
+                strInvalidPass = ['q', 'qw', 'qwe', 'qwer', 'qwert', 'qwerty', 'qwerty', 'querty ', 'querty§'];
+
+                for (var i = 0; i < strValidPass.length; i++) {
+                    ok(strValidPass[i].IsPassword(), 'Senhas informadas são válidos');
+                }
+                for (var i = 0; i < strInvalidPass.length; i++) {
+                    ok(!strInvalidPass[i].IsPassword(), 'Senhas informadas não são válidos');
+                }
+            });
+
+            test('IsValidExtension', function () {
+                expect(2);
+                var strFakeFile1 = "C:/anyfolder/anyfile.xsd";
+                var strFakeFile2 = "C:/anyfolder/anyfile2.html";
+                var arrValid = [".xsd", ".xml", ".jpg", ".jpge", ".png", ".gif"];
+
+                ok(strFakeFile1.IsValidExtension(arrValid), 'É válida');
+                ok(!strFakeFile2.IsValidExtension(arrValid), 'Não é válida');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('formatStrings : Formatação de tipos especiais');
+
+
+
+            test('FormatURL', function () {
+                equal('aeondigital.com.br'.FormatURL(), 'http://aeondigital.com.br');
+            });
+
+            test('FormatLocale', function () {
+                equal('ptbr'.FormatLocale(), 'pt-BR');
+            });
+
+            test('FormatNumeral', function () {
+                var unformated = [
+                                "1", "10", "100", "1000", "10000", "100000", "1000000", "10000000", "100000000"
+                            ];
+
+                var format_EUA = [
+                                "1", "10", "100", "1,000", "10,000", "100,000", "1,000,000", "10,000,000", "100,000,000"
+                            ];
+
+                var format_BR = [
+                                "1", "10", "100", "1.000", "10.000", "100.000", "1.000.000", "10.000.000", "100.000.000"
+                            ];
+
+                var format_EUADecimal = [
+                                "1.000", "10.000", "100.000", "1,000.000", "10,000.000", "100,000.000", "1,000,000.000",
+                                "10,000,000.000", "100,000,000.000"
+                            ];
+
+                var format_BRDecimal = [
+                                "1,000", "10,000", "100,000", "1.000,000", "10.000,000", "100.000,000", "1.000.000,000",
+                                "10.000.000,000", "100.000.000,000"
+                            ];
+
+                var preformated = [
+                                "1.", "1.0", "1.00", "1.000", "1.0000", "1.00000", "1.000000", "1.0000000", "1.00000000"
+                            ];
+
+                var formated_EUA = [
+                                "1.000", "1.000", "1.000", "1.000", "1.000", "1.000", "1.000", "1.000", "1.000",
+                            ];
+
+                var nEUA = String.Pattern.EUA.Number;
+                var nBr = String.Pattern.Brasil.Number;
+
+                for (var i = 0; i < unformated.length; i++) {
+                    equal(unformated[i].FormatNumeral(), format_EUA[i]);
+                    equal(unformated[i].FormatNumeral(nBr), format_BR[i]);
+
+                    equal(unformated[i].FormatNumeral(nEUA, 3), format_EUADecimal[i]);
+                    equal(unformated[i].FormatNumeral(nBr, 3), format_BRDecimal[i]);
+
+                    equal(preformated[i].FormatNumeral(nEUA, 3), formated_EUA[i]);
+                }
+
+                equal('10000'.FormatNumeral_Br(2), '10.000,00');
+                equal((10000).FormatNumeral_Br(2), '10.000,00');
+            });
+
+            test('CompleteCodeWith', function () {
+                var strTeste = "50";
+
+                equal(strTeste.CompleteCodeWith(5), '00050');
+                equal(strTeste.CompleteCodeWith(5, '0', false), '50000');
+                equal(strTeste.CompleteCodeWith(4, "x"), 'xx50');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('formatBrasilStrings : Formatação de tipos de string para Brasil.');
+
+
+
+            test('FormatZipCode_Br', function () {
+                equal('99888777'.FormatZipCode_Br(), '99.888-777');
+                equal('12345678'.FormatZipCode_Br(), '12.345-678');
+            });
+
+            test('FormatPhone_Br', function () {
+                equal('0012345678'.FormatPhone_Br(), '(00) 1234.5678');
+                equal('00123456789'.FormatPhone_Br(), '(00) 123.456.789');
+            });
+
+            test('FormatCPF', function () {
+                equal('99027755000'.FormatCPF(), '990.277.550-00');
+            });
+
+            test('FormatCNPJ', function () {
+                equal('08253743000185'.FormatCNPJ(), '08.253.743/0001-85');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('formatEUAStrings : Formatação de tipos de string para EUA.');
+
+
+
+            test('FormatZipCode_EUA', function () {
+                equal('99-888'.FormatZipCode_EUA(), '99888');
+                equal('999 88'.FormatZipCode_EUA(), '99988');
+                equal('123456789'.FormatZipCode_EUA(), '12345-6789');
+            });
+
+            test('FormatPhone_EUA', function () {
+                equal('0001234567'.FormatPhone_EUA(), '(000) 123-4567');
+                equal('(000)-123.4567'.FormatPhone_EUA(), '(000) 123-4567');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('dateFormat : Manipulação dos formatos de data.');
+
+
+
+            test('ToString', function () {
+                var obj = new Date(2012, 4, 7, 8, 30, 0);
+
+                equal(obj.ToString('yyyy/MM/dd HH:mm'), '2012/05/07 08:30', 'Conversão de data para string');
+                equal(obj.ToString(), '2012/05/07 08:30:00', 'Conversão de data para string');
+                equal(obj.ToString('yyyy/MM/ddTHH:mm:ssZ'), '2012/05/07T08:30:00Z', 'Conversão para DateTime Global + Zone');
+                equal(obj.ToString('yyyy/MM/ddTHH:mm:ss'), '2012/05/07T08:30:00', 'Conversão para DateTime Global');
+                equal(obj.ToString('dd/MM/yyyy HH:mm:ss'), '07/05/2012 08:30:00', 'Formato Brasileiro');
+                equal(obj.ToString('MM/dd/yyyy HH:mm:ss'), '05/07/2012 08:30:00', 'Formato Americano');
+
+                equal(obj.ToString('yyyy/MM/dd'), '2012/05/07', 'Data simples Formato Global');
+                equal(obj.ToString('dd/MM/yyyy'), '07/05/2012', 'Data simples Formato Brasileiro');
+                equal(obj.ToString('MM/dd/yyyy'), '05/07/2012', 'Data simples Formato Americano');
+
+                equal(obj.ToString('yyyy/MM'), '2012/05', 'Formato Mês Global');
+                equal(obj.ToString('MM/yyyy'), '05/2012', 'Formato Mês Brasileiro');
+
+                equal(obj.ToString('HH:mm:ss'), '08:30:00', 'Formato de Horario');
+            });
+
+            test('ToDate', function () {
+                // Informando data em formato universal
+                var obj1 = new Date(2012, 4, 7, 8, 30, 0);
+                var obj2 = new Date(2012, 11, 31, 0, 0, 0);
+
+                var objF1 = '2012/05/07 08:30:00'.ToDate('yyyy/MM/dd HH:mm:ss');
+                var objF2 = '2012-12-31 00:00:00'.ToDate('yyyy/MM/dd HH:mm:ss');
+
+                equal(objF1.toGMTString(), obj1.toGMTString(), 'Conversão de string para data');
+                equal(objF2.toGMTString(), obj2.toGMTString(), 'Conversão de string para data');
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            module('auxiliarFunctions : Funções auxiliares');
+
+
+
+            test('PasswordStrength', function () {
+                var Senha10Pontos = 'a';
+                var CaracterRepetido = 'aaaaaaaaa';
+                var CaracteresDiferentes = 'ab';
+                var Senha30Pontos = 'abc';
+                var CharGruposDiferentes = '4bC';
+                var SenhaCaracteresSimples = '4bCDef';
+                var SenhaCaracteresEspeciais = '4b@D$f';
+                var BonusControleNumeros = '4bCDefrty';
+                var BonusPorNumeros = '4bCDefr68';
+
+                equal(Senha10Pontos.PasswordStrength(), 10, 'Senha de 10 pontos');
+                equal(CaracterRepetido.PasswordStrength(), 10, 'Comprova que caracteres iguais não soma pontuação');
+                equal(CaracteresDiferentes.PasswordStrength(), 20, 'Senha de 20 pontos');
+
+                equal(Senha30Pontos.PasswordStrength(), 30, 'Senha de 30 pontos');
+                equal(CharGruposDiferentes.PasswordStrength(), 50, 'Pontuação especial por caracteres de grupos diferentes');
+
+                equal(SenhaCaracteresSimples.PasswordStrength(), 80, 'Pontuação de controle para caracteres especiais');
+                equal(SenhaCaracteresEspeciais.PasswordStrength(), 95, 'Pontuação com caracteres especiais');
+
+                equal(BonusControleNumeros.PasswordStrength(), 110, 'Pontuação de controle para bonus de numeros');
+                equal(BonusPorNumeros.PasswordStrength(), 115, 'Pontuação com bonus por numeros');
+            });
+
+
+            test('GeneratePassword', function () {
+                
+                var senha1 = GeneratePassword();
+                var senha2 = GeneratePassword();
+
+                notEqual(senha1, senha2, 'Senhas diferentes criadas: ' + senha1 + ' != ' + senha2);
+            });
+
+
+            // ]]>
+        </script>
+    </body>
+</html>
