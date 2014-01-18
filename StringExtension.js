@@ -847,7 +847,7 @@ String.Pattern = {
             * @type {String}
             */
             Format: function (v) {
-                if (v == '' || v.length < 6 || (v.indexOf('http://') == -1 && v.indexOf('https://') == -1 && v.indexOf('ftp://') == -1 && v.indexOf('ftps://') == -1)) {
+                if (v != '' && (v.length < 6 || (v.indexOf('http://') == -1 && v.indexOf('https://') == -1 && v.indexOf('ftp://') == -1 && v.indexOf('ftps://') == -1))) {
                     return 'http://' + v;
                 }
                 return v;
