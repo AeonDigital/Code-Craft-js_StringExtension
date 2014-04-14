@@ -660,8 +660,8 @@ String.Pattern = {
                 nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
                 nDec = (nDec === undefined) ? 0 : nDec;
 
-                dec = nD.Decimal;
-                tho = nD.Thousand;
+                var dec = nD.Decimal;
+                var tho = nD.Thousand;
 
                 // Padroniza o número para um formato "natural"
                 v = v.ReplaceAll(tho, '').replace(',', '.');
