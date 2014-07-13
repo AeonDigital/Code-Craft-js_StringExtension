@@ -143,7 +143,7 @@ String.prototype.OnlyCharCollection = function(valid) {
 *
 * @memberof String
 *
-* @param {String}                           old                                     String que será alterada.
+* @param {String}                           old                                     String que será substituída.
 * @param {String}                           neu                                     String que será adicionada no lugar de "sold".
 *
 * @return {String}
