@@ -20,7 +20,7 @@
 
             module('insertOrRemove : Funções para inserir, remover, alterar ou substituir');
 
-            
+
 
             test('Insert', function () {
                 var str = 'Uma nova palavra deverá surgir em um ponto desta sentença';
@@ -87,14 +87,14 @@
                 var expected = 'Das várias palavras que há nesta...';
                 equal(result, expected, '');
             });
-            
+
             test('ReplaceGlyphs', function () {
                 var str = 'Cáchôrrãoà grandão confusão, há acentuação.';
                 var result = str.ReplaceGlyphs();
                 var expected = 'Cachorraoa grandao confusao_ ha acentuacao.';
                 equal(result, expected, '');
             });
-           
+
             test('ConvertStringToXMLValue', function () {
                 var str = 'Paty & Rianna Cia Ltda > que TTT';
                 var result = str.ConvertStringToXMLValue();
@@ -122,7 +122,7 @@
             });
 
 
-            
+
 
 
 
@@ -142,7 +142,7 @@
 
             module('worldPatterns : Teste de padrões internacionais.');
 
-            
+
 
             test('IsNumber', function () {
                 var NovaString = 'Valor';
@@ -328,7 +328,7 @@
             });
 
 
-            
+
 
 
 
@@ -924,13 +924,30 @@
 
 
             test('GeneratePassword', function () {
-                
+
                 var senha1 = GeneratePassword();
                 var senha2 = GeneratePassword();
 
                 notEqual(senha1, senha2, 'Senhas diferentes criadas: ' + senha1 + ' != ' + senha2);
             });
 
+
+            test('RemoveFormat', function () {
+
+                var origin1 = 1888.25;
+                var origin2 = new Date(1980, 4, 17);
+
+                var format1 = '1.888,25';
+                var format2 = '17/05/1980';
+
+                var result1 = String.Pattern.World.Number.RemoveFormat(format1, { Decimal: ',', Thousand: '.' });
+                var result2 = String.Pattern.Brasil.Dates.Date.RemoveFormat(format2);
+                
+
+                equal(result1, origin1, 'Formato removido');
+                equal(result2.toString(), origin2.toString(), 'Formato removido');
+
+            });
 
             // ]]>
         </script>

@@ -355,6 +355,7 @@ String.prototype.UpperCaseFirst = function (each) {
 * @property {?Integer}                      MaxLength = null                        Número máximo de caracteres aceitos para descrever o formato.
 * @property {Function}                      Check                                   Função validadora do tipo de dado.
 * @property {Function}                      Format                                  Função formatadora do tipo.
+* @property {?Function}                     RemoveFormat                            Função para remover formato inserido.
 */
 
 
@@ -409,8 +410,11 @@ String.prototype.IsPatternMatch = function(r) {
 * @type {Class}
 *
 * @property {Function}                      CheckDateTime                       Valida uma string de data conforme sua definição formatação.
-* @property {Function}                      FormatDateTime                      Converte a string em um objeto Date mediante a especificação do formato.
+* @property {Function}                      ParseStringToDate                   Converte a string em um objeto Date mediante a especificação do formato.
+* @property {Function}                      ParseWeekToDate                     Converte uma string em formato week em um objeto Date.
 * @property {Object}                        World                               Formatos reconhecidos internacionalmente.
+* @property {Object}                        Brasil                              Formatos padrões para o Brasil.
+* @property {Object}                        EUA                                 Formatos padrões para o EUA.
 */
 String.Pattern = {
     /**
@@ -431,7 +435,7 @@ String.Pattern = {
     /**
     * Converte a string em um objeto Date mediante a especificação do formato.
     *
-    * @function FormatDateTime
+    * @function ParseStringToDate
     *
     * @memberof Pattern
     *
@@ -440,7 +444,7 @@ String.Pattern = {
     *
     * @return {?Date}
     */
-    FormatDateTime: function (v, mk) {
+    ParseStringToDate: function (v, mk) {
         var sO = v;
         var oR = null;
 
@@ -504,6 +508,23 @@ String.Pattern = {
         return oR;
     },
     /**
+    * Converte uma string em formato week em um objeto Date.
+    *
+    * @function ParseWeekToDate
+    *
+    * @memberof Pattern
+    *
+    * @param {String}                       v                                       Valor.
+    * @param {String}                       mk                                      Máscara da week.
+    *
+    * @return {?Date}
+    */
+    ParseWeekToDate: function (v, mk) {
+        mk = mk.toLowerCase();
+
+
+    },
+    /**
     * Padroniza o formato da string de data. 
     * Se não for uma data válida retorna o valor inicial
     *
@@ -519,7 +540,7 @@ String.Pattern = {
     * @return {String}
     */
     StandardizeDate: function (v, mk) {
-        var d = String.Pattern.FormatDateTime(v, mk);
+        var d = String.Pattern.ParseStringToDate(v, mk);
         v = d.ToString(mk);
         return v;
     },
@@ -538,9 +559,9 @@ String.Pattern = {
     * @return {String}
     */
     StandardizeWeekDate: function (v, f) {
-        if (typeof (WeekDate) !== 'undefined') {
-            if (WeekDate.IsWeek(v)) {
-                var d = WeekDate.DateOfWeek(v);
+        if (typeof (CodeCraft.WeekDate) !== 'undefined') {
+            if (CodeCraft.WeekDate.IsWeek(v)) {
+                var d = CodeCraft.WeekDate.DateOfWeek(v);
                 v = d.ToWeekFormat(true, f);
             }
         }
@@ -703,6 +724,22 @@ String.Pattern = {
                 }
 
                 return v;
+            },
+            /** 
+            * Remove a formatação do número.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
+            *
+            * @type {Number}
+            */
+            RemoveFormat: function (v, nD) {
+                nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
+                v = v.ReplaceAll(nD.Thousand, '').replace(nD.Decimal, '.');
+                return parseFloat(v);
             }
         },
         /**
@@ -775,7 +812,14 @@ String.Pattern = {
             */
             Format: function (v) {
                 return v.toLowerCase();
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "URL"
@@ -851,7 +895,14 @@ String.Pattern = {
                     return 'http://' + v;
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "Color"
@@ -923,7 +974,14 @@ String.Pattern = {
             */
             Format: function (v) {
                 return v.toUpperCase();
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "Locale"
@@ -999,7 +1057,14 @@ String.Pattern = {
                     return v.substring(0, 2) + '-' + v.substring(2, 4).toUpperCase();
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Configurações padrões para definições de senhas.
@@ -1190,7 +1255,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTimeGlobalZone
                 * @static
                 *
                 * @type {Integer}
@@ -1199,7 +1264,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTimeGlobalZone
                 * @static
                 * 
                 * @type {Integer}
@@ -1230,6 +1295,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.DateTimeGlobalZone
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -1262,7 +1340,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTimeLocal
                 * @static
                 *
                 * @type {Integer}
@@ -1271,7 +1349,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTimeLocal
                 * @static
                 * 
                 * @type {Integer}
@@ -1302,6 +1380,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.DateTimeLocal
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -1334,7 +1425,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTime
                 * @static
                 *
                 * @type {Integer}
@@ -1343,7 +1434,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.DateTime
                 * @static
                 * 
                 * @type {Integer}
@@ -1374,6 +1465,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.DateTime
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -1406,7 +1510,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Date
                 * @static
                 *
                 * @type {Integer}
@@ -1415,7 +1519,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Date
                 * @static
                 * 
                 * @type {Integer}
@@ -1446,6 +1550,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.Date
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -1478,7 +1595,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Month
                 * @static
                 *
                 * @type {Integer}
@@ -1487,7 +1604,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Month
                 * @static
                 * 
                 * @type {Integer}
@@ -1518,6 +1635,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.Month
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -1550,7 +1680,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Week
                 * @static
                 *
                 * @type {Integer}
@@ -1559,7 +1689,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Week
                 * @static
                 * 
                 * @type {Integer}
@@ -1651,6 +1781,22 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeWeekDate(v, 'week');
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.Week
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    if (typeof (CodeCraft.WeekDate) !== 'undefined') {
+                        return CodeCraft.WeekDate.DateOfWeek(v);
+                    }
+                    return null;
                 }
             },
             /**
@@ -1683,7 +1829,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Time
                 * @static
                 *
                 * @type {Integer}
@@ -1692,7 +1838,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.World.Dates.Time
                 * @static
                 * 
                 * @type {Integer}
@@ -1723,6 +1869,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.World.Dates.Time
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             }
         }
@@ -1797,6 +1956,20 @@ String.Pattern = {
             */
             Format: function (v, nDec) {
                 return String.Pattern.World.Number.Format(v, this, nDec);
+            },
+            /** 
+            * Remove a formatação do número.
+            *
+            * @memberof String.Pattern.Brasil.Number
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
+            *
+            * @type {Number}
+            */
+            RemoveFormat: function (v) {
+                return v.ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
             }
         },
         /**
@@ -1873,7 +2046,14 @@ String.Pattern = {
                     return v.substring(0, 2) + '.' + v.substring(2, 5) + '-' + v.substring(5, 8);
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "Phone" (Cod área(2d) + 8|9 dígitos)
@@ -1958,7 +2138,14 @@ String.Pattern = {
                 }
 
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "CPF"
@@ -2071,7 +2258,14 @@ String.Pattern = {
                     return v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6, 9) + '-' + v.substring(9, 11);
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "CNPJ"
@@ -2174,7 +2368,14 @@ String.Pattern = {
                     return v.substring(0, 2) + '.' + v.substring(2, 5) + '.' + v.substring(5, 8) + '/' + v.substring(8, 12) + '-' + v.substring(12, 14);
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Formatos de data utilizadas no Brasil.
@@ -2215,7 +2416,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Date
                 * @static
                 *
                 * @type {Integer}
@@ -2224,7 +2425,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Date
                 * @static
                 * 
                 * @type {Integer}
@@ -2255,6 +2456,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.Brasil.Dates.Date
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -2287,7 +2501,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Month
                 * @static
                 *
                 * @type {Integer}
@@ -2296,7 +2510,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Month
                 * @static
                 * 
                 * @type {Integer}
@@ -2327,6 +2541,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.Brasil.Dates.Month
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             },
             /**
@@ -2359,7 +2586,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Week
                 * @static
                 *
                 * @type {Integer}
@@ -2368,7 +2595,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.Brasil.Dates.Week
                 * @static
                 * 
                 * @type {Integer}
@@ -2399,6 +2626,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeWeekDate(v, 'weekbr');
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.Brasil.Dates.Week
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.World.Dates.Week.RemoveFormat(v);
                 }
             }
         }
@@ -2469,6 +2709,20 @@ String.Pattern = {
             */
             Format: function (v, nDec) {
                 return String.Pattern.World.Number.Format(v, this, nDec);
+            },
+            /** 
+            * Remove a formatação do número.
+            *
+            * @memberof String.Pattern.EUA.Number
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
+            *
+            * @type {Number}
+            */
+            RemoveFormat: function (v) {
+                return v.ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
             }
         },
         /**
@@ -2545,7 +2799,14 @@ String.Pattern = {
                     return v.substring(0, 5) + '-' + v.substring(5, 9);
                 }
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Definição do formato "Phone" (Cod área(3d) + 7 dígitos)
@@ -2623,7 +2884,14 @@ String.Pattern = {
                 }
 
                 return v;
-            }
+            },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Number
+            * @static
+            */
+            RemoveFormat: null
         },
         /**
         * Formatos de data utilizadas nos EUA.
@@ -2664,7 +2932,7 @@ String.Pattern = {
                 /** 
                 * Valor mínimo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.EUA.Dates.Date
                 * @static
                 *
                 * @type {Integer}
@@ -2673,7 +2941,7 @@ String.Pattern = {
                 /** 
                 * Valor máximo em caracteres para expressar o formato.
                 *
-                * @memberof String.Pattern.World.Number
+                * @memberof String.Pattern.EUA.Dates.Date
                 * @static
                 * 
                 * @type {Integer}
@@ -2704,6 +2972,19 @@ String.Pattern = {
                 */
                 Format: function (v) {
                     return String.Pattern.StandardizeDate(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.EUA.Dates.Date
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @type {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
                 }
             }
         }
@@ -3465,8 +3746,8 @@ Date.prototype.ToString = function (f) {
 *
 * @return {?Date}
 */
-String.prototype.ToDate = function (dF) {
-    return String.Pattern.FormatDateTime(this, dF);
+String.prototype.ToDate = function (mk) {
+    return String.Pattern.ParseStringToDate(this, mk);
 };
 
 
