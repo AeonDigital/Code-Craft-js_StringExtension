@@ -343,7 +343,7 @@ String.prototype.UpperCaseFirst = function (each) {
 
 
 /**
-* Objeto de definição para regras de validação de datas.
+* Objeto de definição de tipos de dados especiais.
 *
 * @typedef DataDefinition
 *
