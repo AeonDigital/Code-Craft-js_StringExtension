@@ -772,7 +772,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Email
             * @static
             *
             * @type {Integer}
@@ -781,7 +781,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Email
             * @static
             * 
             * @type {Integer}
@@ -816,7 +816,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Email
             * @static
             */
             RemoveFormat: null
@@ -851,7 +851,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.URL
             * @static
             *
             * @type {Integer}
@@ -860,7 +860,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.URL
             * @static
             * 
             * @type {Integer}
@@ -899,7 +899,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.URL
             * @static
             */
             RemoveFormat: null
@@ -934,7 +934,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Color
             * @static
             *
             * @type {Integer}
@@ -943,7 +943,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Color
             * @static
             * 
             * @type {Integer}
@@ -978,7 +978,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Color
             * @static
             */
             RemoveFormat: null
@@ -1013,7 +1013,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Locale
             * @static
             *
             * @type {Integer}
@@ -1022,7 +1022,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Locale
             * @static
             * 
             * @type {Integer}
@@ -1061,7 +1061,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.World.Locale
             * @static
             */
             RemoveFormat: null
@@ -2002,7 +2002,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.ZipCode
             * @static
             *
             * @type {Integer}
@@ -2011,7 +2011,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.ZipCode
             * @static
             * 
             * @type {Integer}
@@ -2050,7 +2050,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.ZipCode
             * @static
             */
             RemoveFormat: null
@@ -2085,7 +2085,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.Phone
             * @static
             *
             * @type {Integer}
@@ -2094,7 +2094,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.Phone
             * @static
             * 
             * @type {Integer}
@@ -2142,7 +2142,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.Phone
             * @static
             */
             RemoveFormat: null
@@ -2177,7 +2177,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CPF
             * @static
             *
             * @type {Integer}
@@ -2186,7 +2186,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CPF
             * @static
             * 
             * @type {Integer}
@@ -2262,7 +2262,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CPF
             * @static
             */
             RemoveFormat: null
@@ -2297,7 +2297,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CNPJ
             * @static
             *
             * @type {Integer}
@@ -2306,7 +2306,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CNPJ
             * @static
             * 
             * @type {Integer}
@@ -2372,7 +2372,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.Brasil.CNPJ
             * @static
             */
             RemoveFormat: null
@@ -2755,7 +2755,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.ZipCode
             * @static
             *
             * @type {Integer}
@@ -2764,7 +2764,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.ZipCode
             * @static
             * 
             * @type {Integer}
@@ -2803,7 +2803,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.ZipCode
             * @static
             */
             RemoveFormat: null
@@ -2838,7 +2838,7 @@ String.Pattern = {
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.Phone
             * @static
             *
             * @type {Integer}
@@ -2847,7 +2847,7 @@ String.Pattern = {
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.Phone
             * @static
             * 
             * @type {Integer}
@@ -2888,7 +2888,7 @@ String.Pattern = {
             /** 
             * Remove a formatação especial.
             *
-            * @memberof String.Pattern.World.Number
+            * @memberof String.Pattern.EUA.Phone
             * @static
             */
             RemoveFormat: null
