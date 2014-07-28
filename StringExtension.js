@@ -515,55 +515,56 @@ String.Pattern = {
     * @memberof Pattern
     *
     * @param {String}                       v                                       Valor.
-    * @param {String}                       mk                                      Máscara da week.
     *
     * @return {?Date}
     */
-    ParseWeekToDate: function (v, mk) {
-        mk = mk.toLowerCase();
+    ParseWeekToDate: function (v) {
+        if (typeof (CodeCraft.WeekDate) !== 'undefined') {
+            v = v.DateOfWeek();
+        }
 
-
+        return v;
     },
     /**
-    * Padroniza o formato da string de data. 
-    * Se não for uma data válida retorna o valor inicial
+    * Converte a data informada para uma string de data.
+    * Se não for uma data válida retorna o valor inicial.
     *
-    * @function StandardizeDate
+    * @function ParseDateToString
     *
     * @private
     *
     * @memberof Pattern
     *
-    * @param {String}                       v                                       Valor.
+    * @param {Date}                         v                                       Valor.
     * @param {String}                       mk                                      Máscara da data.
     *
     * @return {String}
     */
-    StandardizeDate: function (v, mk) {
-        var d = String.Pattern.ParseStringToDate(v, mk);
-        v = d.ToString(mk);
+    ParseDateToString: function (v, mk) {
+        if (Object.prototype.toString.call(v) === '[object Date]') {
+            v = v.ToString(mk);
+        }
+
         return v;
     },
     /**
-    * Padroniza o formato da string de data em padrão Week. 
+    * Converte a data informada para uma string de week.
+    * Se não for uma data válida retorna o valor inicial.
     *
-    * @function StandardizeWeekDate
+    * @function ParseDateToWeek
     *
     * @private
     *
     * @memberof Pattern
     *
-    * @param {String}                       v                                       Valor.
+    * @param {Date}                         v                                       Valor.
     * @param {String}                       [f = "week"]                            Formato a ser usado para a data (week|weekbr).
     *
     * @return {String}
     */
-    StandardizeWeekDate: function (v, f) {
+    ParseDateToWeek: function (v, f) {
         if (typeof (CodeCraft.WeekDate) !== 'undefined') {
-            if (CodeCraft.WeekDate.IsWeek(v)) {
-                var d = CodeCraft.WeekDate.DateOfWeek(v);
-                v = d.ToWeekFormat(true, f);
-            }
+            v = v.ToWeekFormat(true, f);
         }
         return v;
     },
@@ -1289,12 +1290,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.DateTimeGlobalZone
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1374,12 +1375,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.DateTimeLocal
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1459,12 +1460,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.DateTime
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1544,12 +1545,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.Date
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1629,12 +1630,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.Month
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1780,7 +1781,7 @@ String.Pattern = {
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeWeekDate(v, 'week');
+                    return String.Pattern.ParseDateToWeek(v, 'week');
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -1863,12 +1864,12 @@ String.Pattern = {
                 * @memberof String.Pattern.World.Dates.Time
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -2450,12 +2451,12 @@ String.Pattern = {
                 * @memberof String.Pattern.Brasil.Dates.Date
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -2535,12 +2536,12 @@ String.Pattern = {
                 * @memberof String.Pattern.Brasil.Dates.Month
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -2625,7 +2626,7 @@ String.Pattern = {
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeWeekDate(v, 'weekbr');
+                    return String.Pattern.ParseDateToWeek(v, 'weekbr');
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
@@ -2966,12 +2967,12 @@ String.Pattern = {
                 * @memberof String.Pattern.EUA.Dates.Date
                 * @static
                 *
-                * @param {String}           v                                       Valor.
+                * @param {Date}             v                                       Valor.
                 *
                 * @type {String}
                 */
                 Format: function (v) {
-                    return String.Pattern.StandardizeDate(v, this.Mask);
+                    return String.Pattern.ParseDateToString(v, this.Mask);
                 },
                 /** 
                 * Remove a formatação e devolve um objeto Date
