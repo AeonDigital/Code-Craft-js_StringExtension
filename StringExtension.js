@@ -2008,7 +2008,7 @@ String.Pattern = {
             *
             * @type {Integer}
             */
-            MinLength: 9,
+            MinLength: 10,
             /** 
             * Valor máximo em caracteres para expressar o formato.
             *
@@ -2017,7 +2017,7 @@ String.Pattern = {
             * 
             * @type {Integer}
             */
-            MaxLength: 9,
+            MaxLength: 10,
             /** 
             * Verifica valor.
             *
