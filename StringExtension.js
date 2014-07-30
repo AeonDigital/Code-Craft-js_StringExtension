@@ -739,7 +739,7 @@ String.Pattern = {
             */
             RemoveFormat: function (v, nD) {
                 nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
-                v = v.ReplaceAll(nD.Thousand, '').replace(nD.Decimal, '.');
+                v = v.toString().ReplaceAll(nD.Thousand, '').replace(nD.Decimal, '.');
                 return parseFloat(v);
             }
         },
@@ -1970,7 +1970,7 @@ String.Pattern = {
             * @type {Number}
             */
             RemoveFormat: function (v) {
-                return v.ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
+                return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
             }
         },
         /**
@@ -2723,7 +2723,7 @@ String.Pattern = {
             * @type {Number}
             */
             RemoveFormat: function (v) {
-                return v.ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
+                return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
             }
         },
         /**
