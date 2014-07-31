@@ -660,7 +660,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.toString().IsPatternMatch(this.RegExp);
@@ -675,7 +675,7 @@ String.Pattern = {
             * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
             * @param {Integer}              [nDec = 0]                              Quantidade de digitos após o divisor decimal.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v, nD, nDec) {
                 v = v.toString();
@@ -735,7 +735,7 @@ String.Pattern = {
             * @param {String}               v                                       Valor.
             * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
             *
-            * @type {Number}
+            * @return {Number}
             */
             RemoveFormat: function (v, nD) {
                 nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
@@ -796,7 +796,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -809,7 +809,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 return v.toLowerCase();
@@ -875,7 +875,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 // Garante que a falta do protocolo não invalidará a validação
@@ -889,7 +889,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 if (v != '' && (v.length < 6 || (v.indexOf('http://') == -1 && v.indexOf('https://') == -1 && v.indexOf('ftp://') == -1 && v.indexOf('ftps://') == -1))) {
@@ -958,7 +958,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -971,7 +971,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 return v.toUpperCase();
@@ -1037,7 +1037,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -1050,7 +1050,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.toLowerCase().OnlyCharCollection('abcdefghijklmnopqrstuvywxz');
@@ -1279,7 +1279,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1292,7 +1292,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1305,7 +1305,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1364,7 +1364,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1377,7 +1377,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1390,7 +1390,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1449,7 +1449,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1462,7 +1462,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1475,7 +1475,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1534,7 +1534,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1547,7 +1547,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1560,7 +1560,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1619,7 +1619,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1632,7 +1632,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1645,7 +1645,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1705,7 +1705,7 @@ String.Pattern = {
                 * @param {String}           v                                       Valor.
                 * @param {RegExp}           [rE]                                    RegExp usado para validação do formato.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v, rE) {
                     rE = (rE === undefined) ? this.RegExp : rE;
@@ -1778,7 +1778,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToWeek(v, 'week');
@@ -1791,7 +1791,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     if (typeof (CodeCraft.WeekDate) !== 'undefined') {
@@ -1853,7 +1853,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -1866,7 +1866,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -1879,7 +1879,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -1939,7 +1939,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return String.Pattern.World.Number.Check(v);
@@ -1953,7 +1953,7 @@ String.Pattern = {
             * @param {String}               v                                       Valor.
             * @param {Integer}              [nDec = 0]                              Quantidade de digitos após o divisor decimal.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v, nDec) {
                 return String.Pattern.World.Number.Format(v, this, nDec);
@@ -1967,7 +1967,7 @@ String.Pattern = {
             * @param {String}               v                                       Valor.
             * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
             *
-            * @type {Number}
+            * @return {Number}
             */
             RemoveFormat: function (v) {
                 return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
@@ -2026,7 +2026,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -2039,7 +2039,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2109,7 +2109,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.OnlyCharCollection('1234567890').IsPatternMatch(this.RegExp);
@@ -2122,7 +2122,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2201,7 +2201,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 var cpf = v.OnlyCharCollection('1234567890');
@@ -2251,7 +2251,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2321,7 +2321,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 var cnpj = v.OnlyCharCollection('1234567890');
@@ -2361,7 +2361,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2440,7 +2440,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -2453,7 +2453,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -2466,7 +2466,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -2525,7 +2525,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -2538,7 +2538,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -2551,7 +2551,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
@@ -2610,7 +2610,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.World.Dates.Week.Check(v, this.RegExp);
@@ -2623,7 +2623,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToWeek(v, 'weekbr');
@@ -2636,7 +2636,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.World.Dates.Week.RemoveFormat(v);
@@ -2692,7 +2692,7 @@ String.Pattern = {
             *
             * @param {String}               v                                       Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return String.Pattern.World.Number.Check(v);
@@ -2706,7 +2706,7 @@ String.Pattern = {
             * @param {String}               v                                       Valor.
             * @param {Integer}              [nDec = 0]                              Quantidade de digitos após o divisor decimal.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v, nDec) {
                 return String.Pattern.World.Number.Format(v, this, nDec);
@@ -2720,7 +2720,7 @@ String.Pattern = {
             * @param {String}               v                                       Valor.
             * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
             *
-            * @type {Number}
+            * @return {Number}
             */
             RemoveFormat: function (v) {
                 return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
@@ -2779,7 +2779,7 @@ String.Pattern = {
             *
             * @param {String}           v                                           Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -2792,7 +2792,7 @@ String.Pattern = {
             *
             * @param {String}           v                                           Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2862,7 +2862,7 @@ String.Pattern = {
             *
             * @param {String}           v                                           Valor.
             *
-            * @type {Boolean}
+            * @return {Boolean}
             */
             Check: function (v) {
                 return v.IsPatternMatch(this.RegExp);
@@ -2875,7 +2875,7 @@ String.Pattern = {
             *
             * @param {String}           v                                           Valor.
             *
-            * @type {String}
+            * @return {String}
             */
             Format: function (v) {
                 v = v.OnlyCharCollection('1234567890');
@@ -2956,7 +2956,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {Boolean}
+                * @return {Boolean}
                 */
                 Check: function (v) {
                     return String.Pattern.CheckDateTime(v, this);
@@ -2969,7 +2969,7 @@ String.Pattern = {
                 *
                 * @param {Date}             v                                       Valor.
                 *
-                * @type {String}
+                * @return {String}
                 */
                 Format: function (v) {
                     return String.Pattern.ParseDateToString(v, this.Mask);
@@ -2982,7 +2982,7 @@ String.Pattern = {
                 *
                 * @param {String}           v                                       Valor.
                 *
-                * @type {?Date}
+                * @return {?Date}
                 */
                 RemoveFormat: function (v) {
                     return String.Pattern.ParseStringToDate(v, this.Mask);
