@@ -2100,7 +2100,7 @@ String.Pattern = {
             * 
             * @type {Integer}
             */
-            MaxLength: 15,
+            MaxLength: 16,
             /** 
             * Verifica valor.
             *
