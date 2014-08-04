@@ -2112,7 +2112,11 @@ String.Pattern = {
             * @return {Boolean}
             */
             Check: function (v) {
-                return v.OnlyCharCollection('1234567890').IsPatternMatch(this.RegExp);
+                v = v.OnlyCharCollection('1234567890');
+                if (v.length == 10 || v.length == 11) {
+                    return v.IsPatternMatch(this.RegExp);
+                }
+                return false;
             },
             /** 
             * Formata valor.
