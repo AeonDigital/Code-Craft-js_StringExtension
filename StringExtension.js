@@ -345,7 +345,7 @@ String.prototype.UpperCaseFirst = function (each) {
 /**
 * Objeto de definição de tipos de dados especiais.
 *
-* @typedef DataDefinition
+* @typedef DataFormat
 *
 * @global
 *
@@ -425,7 +425,7 @@ String.Pattern = {
     * @memberof Pattern
     *
     * @param {String}                       v                                       Valor.
-    * @param {DataDefinition}               dd                                      Objeto de definição de formato.
+    * @param {DataFormat}                   dd                                      Objeto de definição de formato.
     *
     * @return {Boolean}
     */
@@ -590,20 +590,20 @@ String.Pattern = {
     *
     * @type {Class}
     *
-    * @property {DataDefinition}                Number                              Definição do formato "Number".
-    * @property {DataDefinition}                Email                               Definição do formato "Email"
-    * @property {DataDefinition}                URL                                 Definição do formato "URL"
-    * @property {DataDefinition}                Color                               Definição do formato "Color"
-    * @property {DataDefinition}                Locale                              Definição do formato "Locale"
+    * @property {DataFormat}                    Number                              Definição do formato "Number".
+    * @property {DataFormat}                    Email                               Definição do formato "Email"
+    * @property {DataFormat}                    URL                                 Definição do formato "URL"
+    * @property {DataFormat}                   Color                               Definição do formato "Color"
+    * @property {DataFormat}                    Locale                              Definição do formato "Locale"
     * @property {PasswordConfig}                Password                            Configurações padrões para definições de senhas. 
     * @property {Object}                        Dates                               Formatos de data conforme ISO 8601 .
-    * @property {DataDefinition}                Dates.DateTimeGlobalZone            Definição do formato "DateTimeGlobalZone".
-    * @property {DataDefinition}                Dates.DateTimeLocal                 Definição do formato "DateTimeLocal".
-    * @property {DataDefinition}                Dates.DateTime                      Definição do formato "DateTime".
-    * @property {DataDefinition}                Dates.Date                          Definição do formato "Date".
-    * @property {DataDefinition}                Dates.Month                         Definição do formato "Month".
-    * @property {DataDefinition}                Dates.Week                          Definição do formato "Week".
-    * @property {DataDefinition}                Dates.Time                          Definição do formato "Time".
+    * @property {DataFormat}                    Dates.DateTimeGlobalZone            Definição do formato "DateTimeGlobalZone".
+    * @property {DataFormat}                    Dates.DateTimeLocal                 Definição do formato "DateTimeLocal".
+    * @property {DataFormat}                    Dates.DateTime                      Definição do formato "DateTime".
+    * @property {DataFormat}                    Dates.Date                          Definição do formato "Date".
+    * @property {DataFormat}                    Dates.Month                         Definição do formato "Month".
+    * @property {DataFormat}                    Dates.Week                          Definição do formato "Week".
+    * @property {DataFormat}                    Dates.Time                          Definição do formato "Time".
     */
     World: {
         /** 
@@ -612,7 +612,7 @@ String.Pattern = {
         * @memberof Pattern.World
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Number: {
             /** 
@@ -749,7 +749,7 @@ String.Pattern = {
         * @memberof Pattern.World
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Email: {
             /** 
@@ -828,7 +828,7 @@ String.Pattern = {
         * @memberof Pattern.World
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         URL: {
             /** 
@@ -911,7 +911,7 @@ String.Pattern = {
         * @memberof Pattern.World
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Color: {
             /** 
@@ -990,7 +990,7 @@ String.Pattern = {
         * @memberof Pattern.World
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Locale: {
             /** 
@@ -1232,7 +1232,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             DateTimeGlobalZone: {
                 /** 
@@ -1317,7 +1317,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             DateTimeLocal: {
                 /** 
@@ -1402,7 +1402,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             DateTime: {
                 /** 
@@ -1487,7 +1487,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Date: {
                 /** 
@@ -1572,7 +1572,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Month: {
                 /** 
@@ -1657,7 +1657,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Week: {
                 /** 
@@ -1806,7 +1806,7 @@ String.Pattern = {
             * @memberof String.Pattern.World.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Time: {
                 /** 
@@ -1904,14 +1904,14 @@ String.Pattern = {
     * @type {Class}
     *
     * @property {NumberDefinition}              Number                              Definições para números.
-    * @property {DataDefinition}                ZipCode                             Definição do formato "ZipCode" (CEP)
-    * @property {DataDefinition}                Phone                               Definição do formato "Phone" (Cod área(2d) + 8|9 dígitos)
-    * @property {DataDefinition}                CPF                                 Definição do formato "CPF"
-    * @property {DataDefinition}                CNPJ                                Definição do formato "CNPJ"
+    * @property {DataFormat}                    ZipCode                             Definição do formato "ZipCode" (CEP)
+    * @property {DataFormat}                    Phone                               Definição do formato "Phone" (Cod área(2d) + 8|9 dígitos)
+    * @property {DataFormat}                    CPF                                 Definição do formato "CPF"
+    * @property {DataFormat}                    CNPJ                                Definição do formato "CNPJ"
     * @property {Object}                        Dates                               Formatos de data utilizadas no Brasil.
-    * @property {DataDefinition}                Dates.Date                          Definição do formato "Date".
-    * @property {DataDefinition}                Dates.Month                         Definição do formato "Month".
-    * @property {DataDefinition}                Dates.Week                          Definição do formato "Week".
+    * @property {DataFormat}                    Dates.Date                          Definição do formato "Date".
+    * @property {DataFormat}                    Dates.Month                         Definição do formato "Month".
+    * @property {DataFormat}                    Dates.Week                          Definição do formato "Week".
     */
     Brasil: {
         /**
@@ -1979,7 +1979,7 @@ String.Pattern = {
         * @memberof Pattern.Brasil
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         ZipCode: {
             /** 
@@ -2062,7 +2062,7 @@ String.Pattern = {
         * @memberof Pattern.Brasil
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Phone: {
             /** 
@@ -2154,7 +2154,7 @@ String.Pattern = {
         * @memberof Pattern.Brasil
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         CPF: {
             /** 
@@ -2274,7 +2274,7 @@ String.Pattern = {
         * @memberof Pattern.Brasil
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         CNPJ: {
             /** 
@@ -2393,7 +2393,7 @@ String.Pattern = {
             * @memberof String.Pattern.Brasil.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Date: {
                 /** 
@@ -2478,7 +2478,7 @@ String.Pattern = {
             * @memberof String.Pattern.Brasil.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Month: {
                 /** 
@@ -2563,7 +2563,7 @@ String.Pattern = {
             * @memberof String.Pattern.Brasil.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Week: {
                 /** 
@@ -2661,10 +2661,10 @@ String.Pattern = {
     * @type {Class}
     *
     * @property {NumberDefinition}              Number                              Definições para números.
-    * @property {DataDefinition}                ZipCode                             Definição do formato "ZipCode"
-    * @property {DataDefinition}                Phone                               Definição do formato "Phone" (Cod área(3d) + 7 dígitos)
+    * @property {DataFormat}                    ZipCode                             Definição do formato "ZipCode"
+    * @property {DataFormat}                    Phone                               Definição do formato "Phone" (Cod área(3d) + 7 dígitos)
     * @property {Object}                        Dates                               Formatos de data utilizadas nos EUA.
-    * @property {DataDefinition}                Dates.Date                          Definição do formato "Date".
+    * @property {DataFormat}                    Dates.Date                          Definição do formato "Date".
     */
     EUA: {
         /**
@@ -2732,7 +2732,7 @@ String.Pattern = {
         * @memberof Pattern.EUA
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         ZipCode: {
             /** 
@@ -2815,7 +2815,7 @@ String.Pattern = {
         * @memberof Pattern.EUA
         * @static
         *
-        * @type {DataDefinition}
+        * @type {DataFormat}
         */
         Phone: {
             /** 
@@ -2909,7 +2909,7 @@ String.Pattern = {
             * @memberof String.Pattern.EUA.Dates
             * @static
             *
-            * @type {DataDefinition}
+            * @type {DataFormat}
             */
             Date: {
                 /** 
