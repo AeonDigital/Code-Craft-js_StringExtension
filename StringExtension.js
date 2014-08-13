@@ -12,16 +12,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 /**
 * Objeto String do javascript.
 *
@@ -31,6 +21,7 @@
 *
 * @global
 */
+
 
 
 
