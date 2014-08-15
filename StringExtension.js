@@ -1106,12 +1106,13 @@ String.Pattern = {
             /**
             * Verifica se a String é uma senha válida conforme configurações padrões.
             *
-            * @function IsPassword
+            * @memberof String.Pattern.World.Password
+            * @static
             *
             * @param {String}               v                                       Valor.
             * @param {Boolean}              [r = false]                             Quando "true" retorna os caracteres inválidos encontrados.
             *
-            * @return {Boolean}
+            * @return {Boolean|String}
             */
             Check: function (v, r) {
                 r = (r === undefined) ? false : r;
@@ -1132,6 +1133,24 @@ String.Pattern = {
 
                 return (r) ? invC : b;
             },
+            /** 
+            * Formata valor.
+            *
+            * @memberof String.Pattern.World.Password
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {String}
+            */
+            Format: function (v) { return v; },
+            /** 
+            * Remove a formatação especial.
+            *
+            * @memberof String.Pattern.World.Password
+            * @static
+            */
+            RemoveFormat: null,
             /**
             * Testa a força da string enquanto senha e retorna sua pontuação.
             *
