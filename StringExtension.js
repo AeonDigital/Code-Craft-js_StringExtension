@@ -2399,6 +2399,91 @@ String.Pattern = {
         */
         Dates: {
             /**
+            * Definição do formato "DateTime".
+            *
+            * @memberof String.Pattern.Brasil.Dates
+            * @static
+            *
+            * @type {DataFormat}
+            */
+            DateTime: {
+                /** 
+                * Máscara do tipo. 
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @type {?String}
+                */
+                Mask: 'dd-MM-yyyy HH:mm:ss',
+                /** 
+                * Expressão regular para validação. 
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @type {RegExp}
+                */
+                RegExp: /^([0]?[1-9]|[12][0-9]|[3][01])[\/\-.]([0]?[1-9]|[1][012])[\/\-.](\d{4})[ ]([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$/,
+                /** 
+                * Valor mínimo em caracteres para expressar o formato.
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @type {Integer}
+                */
+                MinLength: 19,
+                /** 
+                * Valor máximo em caracteres para expressar o formato.
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                * 
+                * @type {Integer}
+                */
+                MaxLength: 19,
+                /** 
+                * Verifica valor.
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @return {Boolean}
+                */
+                Check: function (v) {
+                    return String.Pattern.CheckDateTime(v, this);
+                },
+                /** 
+                * Formata valor.
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @param {Date}             v                                       Valor.
+                *
+                * @return {String}
+                */
+                Format: function (v) {
+                    return String.Pattern.ParseDateToString(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.Brasil.Dates.DateTime
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @return {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
+                }
+            },
+            /**
             * Definição do formato "Date".
             *
             * @memberof String.Pattern.Brasil.Dates
@@ -2914,6 +2999,91 @@ String.Pattern = {
         * @type {Object}
         */
         Dates: {
+            /**
+            * Definição do formato "DateTime".
+            *
+            * @memberof String.Pattern.EUA.Dates
+            * @static
+            *
+            * @type {DataFormat}
+            */
+            DateTime: {
+                /** 
+                * Máscara do tipo. 
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @type {?String}
+                */
+                Mask: 'MM-dd-yyyy HH:mm:ss',
+                /** 
+                * Expressão regular para validação. 
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @type {RegExp}
+                */
+                RegExp: /^([0]?[1-9]|[1][012])[\/\-.]([0]?[1-9]|[12][0-9]|[3][01])[\/\-.](\d{4})[ ]([01]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)$/,
+                /** 
+                * Valor mínimo em caracteres para expressar o formato.
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @type {Integer}
+                */
+                MinLength: 19,
+                /** 
+                * Valor máximo em caracteres para expressar o formato.
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                * 
+                * @type {Integer}
+                */
+                MaxLength: 19,
+                /** 
+                * Verifica valor.
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @return {Boolean}
+                */
+                Check: function (v) {
+                    return String.Pattern.CheckDateTime(v, this);
+                },
+                /** 
+                * Formata valor.
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @param {Date}             v                                       Valor.
+                *
+                * @return {String}
+                */
+                Format: function (v) {
+                    return String.Pattern.ParseDateToString(v, this.Mask);
+                },
+                /** 
+                * Remove a formatação e devolve um objeto Date
+                *
+                * @memberof String.Pattern.EUA.Dates.DateTime
+                * @static
+                *
+                * @param {String}           v                                       Valor.
+                *
+                * @return {?Date}
+                */
+                RemoveFormat: function (v) {
+                    return String.Pattern.ParseStringToDate(v, this.Mask);
+                }
+            },
             /**
             * Definição do formato "Date".
             *
