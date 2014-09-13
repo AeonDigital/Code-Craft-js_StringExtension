@@ -471,9 +471,11 @@ String.Pattern = {
             }
 
             var out = false;
+            var iT = (y == '' && M == '' && d == '') ? true : false;
 
             // Testa limites para ano
             (y == '') ? y = '0001' : ((y < 1 || y > 9999) ? out = true : '');
+            y = (iT) ? 2000 : y;
 
             // Testa limites para mês
             (M == '') ? M = '01' : ((M < 1 || M > 12) ? out = true : '');
@@ -491,8 +493,29 @@ String.Pattern = {
             (s == '') ? s = '00' : ((s < 0 || s > 59) ? out = true : '');
 
             if (!out) {
-                oR = Date.parse(y + '-' + M + '-' + d + 'T' + H + ':' + m + ':' + s);
-                oR = (isNaN(oR)) ? null : new Date(oR);
+                y = parseInt(y, 10);
+                M = parseInt(M, 10);
+                d = parseInt(d, 10);
+                H = parseInt(H, 10);
+                m = parseInt(m, 10);
+                s = parseInt(s, 10);
+
+                oR = new Date(y, (M - 1), d, H, m, s);
+                if (oR.getFullYear() != y ||
+                    oR.getMonth() != (M - 1) ||
+                    oR.getDate() != d ||
+                    oR.getHours() != H ||
+                    oR.getMinutes() != m ||
+                    oR.getSeconds() != s) {
+
+                    console.log(oR.getFullYear() + ' : ' + y);
+                    console.log(oR.getMonth() + ' : ' + M);
+                    console.log(oR.getDate() + ' : ' + d);
+                    console.log(oR.getHours() + ' : ' + H);
+                    console.log(oR.getMinutes() + ' : ' + m);
+                    console.log(oR.getSeconds() + ' : ' + s);
+                    oR = null;
+                }
             }
         }
 

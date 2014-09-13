@@ -17,7 +17,7 @@
 
         <script>
             // <![CDATA[
-
+            
             module('insertOrRemove : Funções para inserir, remover, alterar ou substituir');
 
 
@@ -288,7 +288,7 @@
                 ok(!'2012/01/01T23:59:59'.IsDateTimeGlobalZone(), 'Data inválida');
                 ok(!'2012/01/01T24:59:59Z'.IsDateTimeGlobalZone(), 'Data inválida');
                 ok(!'2012/01/01 23:59:59Z'.IsDateTimeGlobalZone(), 'Data inválida');
-                ok(!'2012/02/30T23:59:59Z'.IsDateTimeGlobalZone(), 'Data valida');
+                ok(!'2012/02/30T23:59:59Z'.IsDateTimeGlobalZone(), 'Data inválida');
             });
 
             test('IsDateTimeLocal', function () {
