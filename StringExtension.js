@@ -7,7 +7,7 @@
 *
 * @author Rianna Cantarelli <rianna.aeon@gmail.com>
 */
-
+'use strict';
 
 
 
