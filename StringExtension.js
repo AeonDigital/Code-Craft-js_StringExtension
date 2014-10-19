@@ -507,13 +507,6 @@ String.Pattern = {
                     oR.getHours() != H ||
                     oR.getMinutes() != m ||
                     oR.getSeconds() != s) {
-
-                    console.log(oR.getFullYear() + ' : ' + y);
-                    console.log(oR.getMonth() + ' : ' + M);
-                    console.log(oR.getDate() + ' : ' + d);
-                    console.log(oR.getHours() + ' : ' + H);
-                    console.log(oR.getMinutes() + ' : ' + m);
-                    console.log(oR.getSeconds() + ' : ' + s);
                     oR = null;
                 }
             }
