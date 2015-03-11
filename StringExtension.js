@@ -600,7 +600,7 @@ String.Pattern = {
     * @property {DataFormat}                    Number                              Definição do formato "Number".
     * @property {DataFormat}                    Email                               Definição do formato "Email"
     * @property {DataFormat}                    URL                                 Definição do formato "URL"
-    * @property {DataFormat}                   Color                               Definição do formato "Color"
+    * @property {DataFormat}                    Color                               Definição do formato "Color"
     * @property {DataFormat}                    Locale                              Definição do formato "Locale"
     * @property {PasswordConfig}                Password                            Configurações padrões para definições de senhas. 
     * @property {Object}                        Dates                               Formatos de data conforme ISO 8601 .
