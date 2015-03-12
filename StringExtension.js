@@ -3436,6 +3436,19 @@ String.prototype.IsCNPJ = function () {
 };
 
 /**
+* Verifica se a string é uma data no formato dd-MM-yyyy HH:mm:ss.
+*
+* @function IsDateTime_Br
+*
+* @memberof String
+*
+* @return {Boolean}
+*/
+String.prototype.IsDateTime_Br = function () {
+	return String.Pattern.Brasil.Dates.DateTime.Check(this);
+};
+
+/**
 * Verifica se a string é uma data no formato dd-MM-yyyy .
 *
 * @function IsDate_Br
@@ -3517,6 +3530,19 @@ String.prototype.IsZipCode_EUA = function () {
 */
 String.prototype.IsPhone_EUA = function () {
 	return String.Pattern.EUA.Phone.Check(this);
+};
+
+/**
+* Verifica se a string é uma data no formato MM-dd-yyyy HH:mm:ss.
+*
+* @function IsDateTime_EUA
+*
+* @memberof String
+*
+* @return {Boolean}
+*/
+String.prototype.IsDateTime_EUA = function () {
+	return String.Pattern.EUA.Dates.DateTime.Check(this);
 };
 
 /**

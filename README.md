@@ -59,6 +59,7 @@ em javascript.
 * `IsPhone_Br`              : Verifica se a string é um Número telefonico brasileiro com Código de Área (2 dígitos) + 8 ou 9 dígitos.
 * `IsCPF`                   : Verifica se a string é um CPF válido(com ou sem formatação).
 * `IsCNPJ`                  : Verifica se a string é um CNPJ válido(com ou sem formatação).
+* `IsDateTime_Br`           : Verifica se a string é uma data no formato dd-MM-yyyy HH:mm:ss .
 * `IsDate_Br`               : Verifica se a string é uma data no formato dd-MM-yyyy .
 * `IsMonth_Br`              : Verifica se a string é uma data no formato MM-yyyy .
 * `IsWeek_Br`               : Verifica se a string é uma data no formato d-Wxx-yyyy .
@@ -68,6 +69,7 @@ em javascript.
 
 * `IsZipCode_EUA`           : Verifica se a string é um ZipCode válido [99999 Ou 99999-9999] .
 * `IsPhone_EUA`             : Verifica se a string é um Número telefonico dos EUA com Código de Área (3 digitos) + 7 dígitos.
+* `IsDateTime_EUA`          : Verifica se a string é uma data no formato MM-dd-yyyy HH:mm:ss .
 * `IsDate_EUA`              : Verifica se a string é uma data no formato MM-dd-yyyy.
 
 
@@ -102,7 +104,6 @@ em javascript.
 
 ### Manipulação dos formatos de data
 
-* `CleanDateFormat`         : Remove marcação especial de um "dateFormat".
 * `ToString`                : Converte a instância Date para um formato string conforme informado.
 * `ToDate`                  : Converte a string em um objeto Date mediante a especificação do formato.
 
@@ -110,6 +111,7 @@ em javascript.
 ### Funções auxiliares
 
 * `PasswordStrength`        : Testa a força da string enquanto senha e retorna sua pontuação.
+* `GeneratePassword`        : Gera uma senha de forma aleatória.
 
 
 **Importante**
