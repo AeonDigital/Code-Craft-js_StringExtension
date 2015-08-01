@@ -142,6 +142,7 @@ String.prototype.OnlyCharCollection = function(valid) {
 String.prototype.ReplaceAll = function (old, neu) {
 	var sR = this;
     while(sR.indexOf(old) != -1) { sR = sR.replace(old, neu); }
+
 	return sR;
 };
 
