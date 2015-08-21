@@ -2076,7 +2076,7 @@ String.Pattern = {
             *
             * @type {RegExp}
             */
-            RegExp: /^([\d]{8})|((([\d]{5})|(([\d]{2})([.]{1,1})([\d]{3})))([-]{1,1})(\d{3}))$/,
+            RegExp: /^([\d]{8}$)|((([\d]{5})|(([\d]{2})([.]{1,1})([\d]{3})))([-]{1,1})(\d{3}))$/,
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
