@@ -2001,6 +2001,56 @@ String.Pattern = {
             }
         },
         /**
+        * Definições para números em formato financeiro.
+        *
+        * @memberof Pattern.Brasil
+        * @static
+        *
+        * @type {DataFormat}
+        */
+        Money: {
+            /** 
+            * Verifica valor.
+            *
+            * @memberof String.Pattern.Brasil.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            Check: function (v) {
+                return String.Pattern.Brasil.Number.Check(v);
+            },
+            /** 
+            * Formata valor.
+            *
+            * @memberof String.Pattern.Brasil.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {String}
+            */
+            Format: function (v) {
+                return String.Pattern.Brasil.Number.Format(v, 2);
+            },
+            /** 
+            * Remove a formatação do número.
+            *
+            * @memberof String.Pattern.Brasil.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
+            *
+            * @return {Number}
+            */
+            RemoveFormat: function (v) {
+                return String.Pattern.Brasil.Number.RemoveFormat(v);
+            }
+        },
+        /**
         * Definição do formato "ZipCode" (CEP)
         *
         * @memberof Pattern.Brasil
@@ -2837,6 +2887,56 @@ String.Pattern = {
             */
             RemoveFormat: function (v) {
                 return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
+            }
+        },
+        /**
+        * Definições para números em formato financeiro.
+        *
+        * @memberof Pattern.EUA
+        * @static
+        *
+        * @type {DataFormat}
+        */
+        Money: {
+            /** 
+            * Verifica valor.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            Check: function (v) {
+                return String.Pattern.EUA.Number.Check(v);
+            },
+            /** 
+            * Formata valor.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {String}
+            */
+            Format: function (v) {
+                return String.Pattern.EUA.Number.Format(v, 2);
+            },
+            /** 
+            * Remove a formatação do número.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            * @param {NumberDefinition}     [nD]                                    Definições dos separadores numéricos conforme cultura.
+            *
+            * @return {Number}
+            */
+            RemoveFormat: function (v) {
+                return String.Pattern.EUA.Number.RemoveFormat(v);
             }
         },
         /**
