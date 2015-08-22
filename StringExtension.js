@@ -758,7 +758,18 @@ String.Pattern = {
             */
             RemoveFormat: function (v, nD) {
                 nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
-                v = v.toString().ReplaceAll(nD.Thousand, '').replace(nD.Decimal, '.');
+                var dec = nD.Decimal;
+                var tho = nD.Thousand;
+
+
+                // Se o valor inicialmente definido for um numeral
+                // converte seu marcador Decimal pela definição informada...
+                if (!isNaN(v)) {
+                    v = v.toString().replace('.', dec);
+                }
+
+
+                v = v.toString().ReplaceAll(tho, '').replace(dec, '.');
                 return parseFloat(v);
             }
         },
@@ -2008,7 +2019,7 @@ String.Pattern = {
             * @return {Number}
             */
             RemoveFormat: function (v) {
-                return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
+                return String.Pattern.World.Number.RemoveFormat(v, this);
             }
         },
         /**
@@ -2897,7 +2908,7 @@ String.Pattern = {
             * @return {Number}
             */
             RemoveFormat: function (v) {
-                return v.toString().ReplaceAll(this.Thousand, '').replace(this.Decimal, '.');
+                return String.Pattern.World.Number.RemoveFormat(v, this);
             }
         },
         /**
