@@ -686,18 +686,29 @@ String.Pattern = {
             * @return {String}
             */
             Format: function (v, nD, nDec) {
-                v = v.toString();
                 nD = (nD === undefined) ? { Decimal: '.', Thousand: ','} : nD;
                 nDec = (nDec === undefined) ? 0 : nDec;
 
                 var dec = nD.Decimal;
                 var tho = nD.Thousand;
 
+
+
+                // Se o valor inicialmente definido for um numeral
+                // converte seu marcador Decimal pela definição informada...
+                if ((typeof (v) === 'number')) {
+                    v = v.toString().replace('.', dec);
+                }
+
+
                 // Padroniza o número para um formato "natural"
+                v = v.toString();
                 v = v.ReplaceAll(tho, '').replace(',', '.');
 
 
+
                 if (!isNaN(v)) {
+
 
                     var iDec = v.indexOf('.');
                     var left = 0;
