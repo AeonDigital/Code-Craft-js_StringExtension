@@ -674,6 +674,20 @@ String.Pattern = {
                 return v.toString().IsPatternMatch(this.RegExp);
             },
             /** 
+            * Verificação extra para o valor informado.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            ExtraCheck: function (v) {
+                var _v = this.RemoveFormat(v);
+                return this.Check(_v);
+            },
+            /** 
             * Formata valor.
             *
             * @memberof String.Pattern.World.Number
@@ -1994,6 +2008,20 @@ String.Pattern = {
                 return String.Pattern.World.Number.Check(v);
             },
             /** 
+            * Verificação extra para o valor informado.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            ExtraCheck: function (v) {
+                var _v = this.RemoveFormat(v);
+                return this.Check(_v);
+            },
+            /** 
             * Formata valor.
             *
             * @memberof String.Pattern.Brasil.Number
@@ -2043,6 +2071,20 @@ String.Pattern = {
             */
             Check: function (v) {
                 return String.Pattern.Brasil.Number.Check(v);
+            },
+            /** 
+            * Verificação extra para o valor informado.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            ExtraCheck: function (v) {
+                var _v = this.RemoveFormat(v);
+                return this.Check(_v);
             },
             /** 
             * Formata valor.
@@ -2883,6 +2925,20 @@ String.Pattern = {
                 return String.Pattern.World.Number.Check(v);
             },
             /** 
+            * Verificação extra para o valor informado.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            ExtraCheck: function (v) {
+                var _v = this.RemoveFormat(v);
+                return this.Check(_v);
+            },
+            /** 
             * Formata valor.
             *
             * @memberof String.Pattern.EUA.Number
@@ -2932,6 +2988,20 @@ String.Pattern = {
             */
             Check: function (v) {
                 return String.Pattern.EUA.Number.Check(v);
+            },
+            /** 
+            * Verificação extra para o valor informado.
+            *
+            * @memberof String.Pattern.EUA.Money
+            * @static
+            *
+            * @param {String}               v                                       Valor.
+            *
+            * @return {Boolean}
+            */
+            ExtraCheck: function (v) {
+                var _v = this.RemoveFormat(v);
+                return this.Check(_v);
             },
             /** 
             * Formata valor.
