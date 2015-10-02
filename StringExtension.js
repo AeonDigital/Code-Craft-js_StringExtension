@@ -215,7 +215,7 @@ String.prototype.ReplaceGlyphs = function () {
         // 64-90    : Range dos Caracteres Maiusculos
         // 97-122   : Range dos Caracteres Minusculos
 		if ((cod >= 48 && cod <= 57) || (cod >= 65 && cod <= 90) || (cod >= 97 && cod <= 122) ||
-        (c == '.' || c == ' ')) { 
+        (c == '.' || c == ',' || c == '-' || c == ' ')) { 
             s += c; 
         }
 		else { s += '_'; }
