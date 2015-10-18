@@ -474,6 +474,7 @@ String.Pattern = {
             var out = false;
             var iT = (y == '' && M == '' && d == '') ? true : false;
 
+
             // Testa limites para ano
             (y == '') ? y = '0001' : ((y < 1 || y > 9999) ? out = true : '');
             y = (iT) ? 2000 : y;
@@ -493,6 +494,7 @@ String.Pattern = {
             // Testa limites para segundo
             (s == '') ? s = '00' : ((s < 0 || s > 59) ? out = true : '');
 
+
             if (!out) {
                 y = parseInt(y, 10);
                 M = parseInt(M, 10);
@@ -501,11 +503,12 @@ String.Pattern = {
                 m = parseInt(m, 10);
                 s = parseInt(s, 10);
 
+
                 oR = new Date(y, (M - 1), d, H, m, s);
                 if (oR.getFullYear() != y ||
                     oR.getMonth() != (M - 1) ||
                     oR.getDate() != d ||
-                    oR.getHours() != H ||
+                    (oR.getHours() != H && (H == 0 && oR.getHours() != 1)) ||
                     oR.getMinutes() != m ||
                     oR.getSeconds() != s) {
                     oR = null;
