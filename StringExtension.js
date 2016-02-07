@@ -895,7 +895,7 @@ String.Pattern = {
             *
             * @type {RegExp}
             */
-            RegExp: /^(((http)|(https)|(ftp)|(ftps))(:\/\/))?([\w]{1,256})([.]{1,1})([\w#!:.?+=&%@\-\/]{1,1783})$/,
+            RegExp: /^(((http)|(https)|(ftp)|(ftps))(:\/\/))?([\w\-]{1,256})([.]{1,1})([\w#!:.?+=&%@\-\/]{1,1783})$/,
             /** 
             * Valor mínimo em caracteres para expressar o formato.
             *
